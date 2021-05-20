@@ -8,9 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            HeaderView()
+            TabView {
+                RandomQuoteView()
+                    .tabItem {
+                        Image(systemName: "shuffle")
+                    }
+                AllQuotesView()
+                    .tabItem {
+                        Image(systemName: "list.bullet")
+                    }
+            }
+        }
     }
 }
 
