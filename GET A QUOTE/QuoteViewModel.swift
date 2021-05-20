@@ -27,11 +27,19 @@ extension Quote: Identifiable {
     }
 }
 
+/**
+ View Model in the MVVM design pattern where the model is a REST api service
+ */
 class QuoteViewModel: ObservableObject {
     
     @Published var allQuotes = [Quote]()
     @Published var randomQuote = [Quote]()
     
+    /**
+     @route GET api/quotes
+     @desc Get a random Quote
+     @access Public
+     */
     func fetchRandomQuote() {
         guard let url = URL(string: "https://lit-plateau-87240.herokuapp.com/api/quotes/")
         else {
@@ -51,6 +59,11 @@ class QuoteViewModel: ObservableObject {
         }.resume()
     }
     
+    /**
+     @route   GET api/quotes/all
+     @desc    Get all Quotes
+     @access  Public
+     */
     func fetchAllQuotes() {
         guard let url = URL(string: "https://lit-plateau-87240.herokuapp.com/api/quotes/all/")
         else {
@@ -69,6 +82,11 @@ class QuoteViewModel: ObservableObject {
         }.resume()
     }
     
+    /**
+     @route DELETE api/quotes/all/:id
+     @desc Delete a Quote
+     @access Public
+     */
     func deleteQuote(_ index: Int) {
         guard let url = URL(string: "https://lit-plateau-87240.herokuapp.com/api/quotes/all/\(allQuotes[index].id)")
         else {
@@ -86,6 +104,11 @@ class QuoteViewModel: ObservableObject {
         allQuotes.remove(at: index)
     }
     
+    /**
+     @route POST api/quotes
+     @desc Create a quote
+     @access Public
+     */
     func createQuote(_ quote: String, _ author: String){
         guard let url = URL(string: "https://lit-plateau-87240.herokuapp.com/api/quotes/")
         else {
